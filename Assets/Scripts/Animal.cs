@@ -7,6 +7,8 @@ using UnityEngine;
 // BUG: gizmos not updating to the new range of the new generation
 // BUG: dumb ai, running into entities that higher in the food chain
 // BUG: if pregnant female dies before birth, her partener's stats are not resetting and cannot reproduce anymore
+// NOTE: look to implement a finite state machine with inheritance to get rid of this ugly code and to be able to implement corutines.
+// NOTE: look to implement genetic algorithms...
 
 // [Messages for later]
 public class Animal : MonoBehaviour
@@ -229,6 +231,7 @@ public class Animal : MonoBehaviour
         // hande pregnant status
         if(isPregnant)
         {
+            //StartCoroutine(DeliverBaby());
             //wait time to deliver the baby
             pregnantCooldownTimeStamp += Time.deltaTime;
             if(pregnantCooldownTimeStamp > pregnantCooldown)
@@ -289,11 +292,66 @@ public class Animal : MonoBehaviour
                 babyAnimal.fatherOfMyChild = null;
                          
             }
-        }
+         }
 
 
 
     }
+    //NOTE: corutine will work if we add a state machine with inheritance
+    // IEnumerator DeliverBaby()
+    // {
+    //     yield return new WaitForSeconds(pregnantCooldown);
+
+    //     counters.totalBirths++;
+    //             animalReproductiveTimeStamp = 0f;
+    //             isPregnant = false;
+    //             recentlyReproducted = false;
+    //             reachedPartener = false;
+    //             // check for null otherwise if the father dies before the baby is born this will throw an error
+    //             if(fatherOfMyChild != null)
+    //             {
+    //                 fatherOfMyChild.GetComponent<Animal>().reachedPartener = false;
+    //                 fatherOfMyChild.GetComponent<Animal>().recentlyReproducted = false;
+    //             }
+                
+    //             var baby = Instantiate(this.gameObject, transform.position, Quaternion.identity);
+    //             Animal babyAnimal = baby.GetComponent<Animal>();
+    //             // but baby stats are random between mother and father
+    //             // TODO: get a better formula for the new generation; only the fittest will survive and replicate /w for genes
+    //             // NOTE: working on formula...
+    //             // animalRandomMutation + animalFathersSpeed + animalFathersRange
+    //             animalRandomMutation = Random.Range(0.9f, 1.1f);
+    //             babySpeedRand = ((animalSpeed + animalFathersSpeed) * animalRandomMutation) / 2f;
+    //             babyRangeRand = ((animalVisionRadius + animalFathersRange) * animalRandomMutation) / 2f;
+
+    //             // assign the better stats to child???
+    //             if(babySpeedRand < animalSpeed) babySpeedRand = animalSpeed;
+    //             if(babyRangeRand < animalVisionRadius) babyRangeRand = animalVisionRadius;
+
+    //             // for first generation of babies it adds another collider..so destroy and re-add
+    //             if(babyAnimal.generation == 0) {
+    //                 Destroy(baby.GetComponent<SphereCollider>());
+    //                 SphereCollider babySC = baby.AddComponent<SphereCollider>();
+    //                 babySC.radius = babyRangeRand;
+    //                 babySC.isTrigger = true;
+    //             }
+
+                
+    //             // we can now increase generation and the collider issue will go away
+    //             babyAnimal.generation++;
+                
+    //             // asign all stats to baby
+    //             babyAnimal.animalSpeed = babySpeedRand;
+    //             if(Random.Range(0,2) == 1) babyAnimal.isMale = false;
+    //             else babyAnimal.isMale = true;
+    //             babyAnimal.isHungry = false;
+    //             babyAnimal.animalHealth = 100f;
+    //             babyAnimal.animalHunger = 0f;
+    //             // reset mother and father
+    //             fatherOfMyChild = null;
+    //             babyAnimal.fatherOfMyChild = null;
+
+    // }
     void AnimalStatusControl() 
     {
         if(!isAlive) 
@@ -321,12 +379,13 @@ public class Animal : MonoBehaviour
 
     private void OnTriggerStay(Collider other) 
     {
-
+                
         // see if the other object is a LiveEntity
         if(other.TryGetComponent<LiveEntity>(out LiveEntity entity))
         {
             //  set the entity animal variable for easier access
             Animal entityAnimal = entity.GetComponent<Animal>();
+            #region Reproduce
             // ACTION: REPRODUCE: if you and the other entity are both interested to mate
             // check if we are the same animal species and one of us is a male and the other one is a female
             if((entity.species == species) && ((isMale && !entityAnimal.isMale) || (!isMale && entityAnimal.isMale)))
@@ -392,6 +451,7 @@ public class Animal : MonoBehaviour
                 }
                 
             }
+            #endregion
             // ACTION: EAT: see if the other object, entity, is your diet (food)
             if(entity.species == diet && isHungry)
             {
