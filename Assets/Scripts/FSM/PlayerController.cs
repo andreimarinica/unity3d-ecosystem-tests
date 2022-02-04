@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Collision Collision;
-    [SerializeField] Movement Movement;
-    [SerializeField] Stats Stats;
+    public CollisionP CollisionP;
+    public Movement Movement;
+    public Stats Stats;
+
     // Start is called before the first frame update
-    void Start()
+    //NOTE: if we use start method will throw error as the object is not assigned yet so we use to set these in awake
+    void Awake()
     {
-        
+        CollisionP = GetComponent<CollisionP>();
+        Movement = GetComponent<Movement>();
+        Stats = GetComponent<Stats>();
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         
     }

@@ -4,11 +4,12 @@ public class PatrollingState : BaseState
 {
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("Hello from the patrolling state");
+        PlayerController = player.GetComponent<PlayerController>();
+        //PlayerController.CollisionP.StartCol();
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        Debug.Log("Hello once a frame lol");
+        //Debug.Log("Hello once a frame lol");
     }
     public override void OnCollisionEnter(PlayerStateManager player)
     {

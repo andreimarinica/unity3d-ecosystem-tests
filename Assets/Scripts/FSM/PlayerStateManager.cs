@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    [SerializeField] public PlayerController Player;
     BaseState currentState;
     public PatrollingState Patrolling = new PatrollingState();
     public HungryState Hungry = new HungryState();
@@ -13,8 +12,9 @@ public class PlayerStateManager : MonoBehaviour
     public DeadState Dead = new DeadState();
     public PregnantState Pregnant = new PregnantState();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        currentState.PlayerController = GetComponent<PlayerController>();
         currentState = Patrolling;
         currentState.EnterState(this);
     }
