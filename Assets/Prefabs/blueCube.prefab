@@ -397,6 +397,8 @@ GameObject:
   - component: {fileID: 1332922606859913827}
   - component: {fileID: 1332922606859913826}
   - component: {fileID: 1332922606859913829}
+  - component: {fileID: -3372578257460881821}
+  - component: {fileID: 5187742722187455545}
   m_Layer: 6
   m_Name: blueCube
   m_TagString: Untagged
@@ -505,7 +507,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332922606859913835}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 613dac52453adc44ca274fecc344d4a5, type: 3}
   m_Name: 
@@ -544,9 +546,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332922606859913835}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69ac104f3337c464a80224e06cdc0c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   species: 2
+--- !u!114 &-3372578257460881821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332922606859913835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1623a81cce0928241b82e517ceb9662a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+--- !u!114 &5187742722187455545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332922606859913835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c96b39a90f3ec84d94d5f056fe18304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Movement: {fileID: 0}
+  Stats: {fileID: 0}
