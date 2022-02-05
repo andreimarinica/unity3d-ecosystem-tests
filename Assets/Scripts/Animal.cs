@@ -146,23 +146,23 @@ public class Animal : MonoBehaviour
         
     }
 
-    private void OnDrawGizmos() {
-        if(this.species == Species.blueCube)
-        {
-            Gizmos.color = new Color(1f, 0f, 0f, 0.2f);
-            Gizmos.DrawSphere(transform.position, animalVisionRadius * 4);
-        }
-        else
-        {
-            if(this.species == Species.greenCube)
-            {
-                Gizmos.color = new Color(1f, 1f, 1f, 0.2f);
-                Gizmos.DrawSphere(transform.position, animalVisionRadius * 2);
-            }
-        }
+    // private void OnDrawGizmos() {
+    //     if(this.species == Species.blueCube)
+    //     {
+    //         Gizmos.color = new Color(1f, 0f, 0f, 0.2f);
+    //         Gizmos.DrawSphere(transform.position, animalVisionRadius * 4);
+    //     }
+    //     else
+    //     {
+    //         if(this.species == Species.greenCube)
+    //         {
+    //             Gizmos.color = new Color(1f, 1f, 1f, 0.2f);
+    //             Gizmos.DrawSphere(transform.position, animalVisionRadius * 2);
+    //         }
+    //     }
         
         
-    }
+    // }
 
     void AnimalStatsGenerator()
     {

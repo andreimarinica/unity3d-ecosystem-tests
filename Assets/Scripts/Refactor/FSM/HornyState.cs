@@ -10,6 +10,10 @@ public class HornyState : BaseState
     {
 
     }
+    public override void OnTriggerStay(PlayerStateManager player, Collider other)
+    {
+        
+    }
     public override void OnCollisionEnter(PlayerStateManager player)
     {
         

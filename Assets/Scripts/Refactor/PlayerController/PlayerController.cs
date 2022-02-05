@@ -17,9 +17,27 @@ public class PlayerController : MonoBehaviour
         Stats = GetComponent<Stats>();
     }
 
+    void Start() {
+        // on init add the sphere collider as a trigger
+        // NOTE: when we will instantiate a child it will take this component as well
+        SphereCollider sphereCollider = gameObject.AddComponent<SphereCollider>();
+        sphereCollider.radius = Movement.visualRange;
+        sphereCollider.isTrigger = true;
+    }
+
     // Update is called once per frame
-    public void Update()
+    void Update()
     {
         
+    }
+
+    public void KillEntity(GameObject entity)
+    {
+        Destroy(entity);
+    }
+
+    public void InstantiateEntity(GameObject entity)
+    {
+        Instantiate(entity, Movement.GameArea.GetRandomPosition(), Quaternion.identity);
     }
 }

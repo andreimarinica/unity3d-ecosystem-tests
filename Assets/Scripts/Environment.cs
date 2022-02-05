@@ -11,13 +11,13 @@ public class Environment : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        foreach(InitialPopulations pop in initialPopulations)
-        {
-            for (int i = 0; i < pop.count; i++)
-            {
-                SpawnAnimal(pop.prefab);
-            }
-        }
+        // foreach(InitialPopulations pop in initialPopulations)
+        // {
+        //     for (int i = 0; i < pop.count; i++)
+        //     {
+        //         SpawnAnimal(pop.prefab);
+        //     }
+        // }
     }
 
     // Update is called once per frame
@@ -69,10 +69,10 @@ public class Environment : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public class InitialPopulations
-{
-    public string name;
-    public GameObject prefab;
-    public int count;
-}
+// [System.Serializable]
+// public class InitialPopulations
+// {
+//     public string name;
+//     public GameObject prefab;
+//     public int count;
+// }

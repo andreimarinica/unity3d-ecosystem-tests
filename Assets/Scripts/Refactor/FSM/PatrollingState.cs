@@ -2,16 +2,41 @@ using UnityEngine;
 
 public class PatrollingState : BaseState
 {
+    
     public override void EnterState(PlayerStateManager player)
     {
+        // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
-        PlayerController.ManageCollision.StartCol();
-        // move to random direction within bounds
+
+        // set random target
+        PlayerController.Movement.targetLocation = PlayerController.Movement.GameArea.GetRandomPosition();
+        
         
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        //Debug.Log("Hello once a frame lol");
+        // move to the target that has been set
+        PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
+
+        // set the distance to the target
+        PlayerController.Movement.targetDistance = Vector3.Distance(PlayerController.transform.position, PlayerController.Movement.targetLocation);
+
+        // check if we reached the target
+        if(PlayerController.Movement.targetDistance <= 1f)
+        {
+            // if we reached target set a new random target
+            PlayerController.Movement.targetLocation = PlayerController.Movement.GameArea.GetRandomPosition();
+        }
+
+        // do we need to switch state?
+        if(PlayerController.Stats.hunger > 50f)
+        {
+            player.SwitchState(player.Hungry);
+        } 
+    }
+    public override void OnTriggerStay(PlayerStateManager player, Collider other)
+    {
+        
     }
     public override void OnCollisionEnter(PlayerStateManager player)
     {

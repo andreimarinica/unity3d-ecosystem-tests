@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3909814038010397991}
   - component: {fileID: 3909814038010397984}
   - component: {fileID: 3909814038010397985}
+  - component: {fileID: 5038192053777207898}
   m_Layer: 0
   m_Name: redCube
   m_TagString: Untagged
@@ -126,3 +127,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &5038192053777207898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909814038010397986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9a0cd388eaba143b7b298e2f6214d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  healthDecreaseRatio: 10
+  hunger: 0
+  hungerDecreaseRatio: 10
+  reproductiveUrge: 0
+  generation: 0
+  sex: 0
+  Species: 3
+  Diet: 6
+  foodList: []

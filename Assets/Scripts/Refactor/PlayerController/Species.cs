@@ -2,6 +2,10 @@ public enum Species
 {
     greenCube, 
     redCube,
-    blueCube
+    blueCube,
+    Food,
+    Rabbit,
+    Fox,
+    NAN
     
 }

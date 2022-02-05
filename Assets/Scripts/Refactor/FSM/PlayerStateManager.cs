@@ -15,9 +15,12 @@ public class PlayerStateManager : MonoBehaviour
 
     void Start()
     {
-
         currentState = Patrolling;
         currentState.EnterState(this);
+    }
+
+    void OnTriggerStay(Collider other) {
+        currentState.OnTriggerStay(this, other);
     }
 
     // Update is called once per frame

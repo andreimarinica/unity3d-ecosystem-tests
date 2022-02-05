@@ -394,8 +394,6 @@ GameObject:
   - component: {fileID: 8264242754386881094}
   - component: {fileID: 8264242754386881093}
   - component: {fileID: 8264242754386881092}
-  - component: {fileID: 8264242754386881088}
-  - component: {fileID: 8264242754386881090}
   - component: {fileID: 8264242754386881089}
   - component: {fileID: -3045455632671742028}
   - component: {fileID: -1880972924819934472}
@@ -487,58 +485,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8264242754386881088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264242754386881099}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dac52453adc44ca274fecc344d4a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isIdle: 0
-  animalSpeed: 15
-  animalVisionRadius: 8
-  generation: 0
-  isHungry: 0
-  animalHunger: 0
-  animalHungerDecayRate: 10
-  animalHungerDecreaseValue: 1
-  isAlive: 1
-  animalHealth: 100
-  animalHealthDecayRate: 10
-  animalHealthDecreaseValue: 1
-  isMale: 1
-  hasPartener: 0
-  recentlyReproducted: 0
-  reachedPartener: 0
-  isPregnant: 0
-  pregnantCooldown: 20
-  pregnantCooldownTimeStamp: 0
-  animalReproductiveUrge: 50
-  animalUrgeIncreaseValue: 5
-  animalUrgeGrowthRate: 20
-  distanceParteners: 0
-  animalTimeAdditive: 0
-  animalTimeLimitIncrement: 10
-  species: 0
-  diet: 1
---- !u!114 &8264242754386881090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264242754386881099}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ac104f3337c464a80224e06cdc0c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  species: 0
 --- !u!54 &8264242754386881089
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -567,7 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1623a81cce0928241b82e517ceb9662a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerController: {fileID: -1880972924819934472}
 --- !u!114 &-1880972924819934472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c96b39a90f3ec84d94d5f056fe18304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionP: {fileID: 0}
+  ManageCollision: {fileID: 0}
   Movement: {fileID: 0}
   Stats: {fileID: 0}
 --- !u!114 &-3225023406854971988
@@ -595,6 +540,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa68f831c5820e148b36c71949d5f6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
+  visualRange: 10
+  targetDistance: 0
+  targetLocation: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  GameArea: {fileID: 0}
 --- !u!114 &-6863347660623897393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,3 +570,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9a0cd388eaba143b7b298e2f6214d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  hunger: 0
+  reproductiveUrge: 0
+  generation: 0
+  sex: 0
+  Species: 4
+  Diet: 3
