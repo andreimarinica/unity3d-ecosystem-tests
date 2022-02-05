@@ -12,9 +12,10 @@ public class PlayerStateManager : MonoBehaviour
     public DeadState Dead = new DeadState();
     public PregnantState Pregnant = new PregnantState();
     // Start is called before the first frame update
-    void Awake()
+
+    void Start()
     {
-        currentState.PlayerController = GetComponent<PlayerController>();
+
         currentState = Patrolling;
         currentState.EnterState(this);
     }

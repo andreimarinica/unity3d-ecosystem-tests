@@ -9,12 +9,12 @@ public class CameraScript : MonoBehaviour
     float speedV = 2f;
     float yaw = 0f;
     float pitch = 0f;
-    float lookFactor = 10f;
-    bool cameraSprint = false;
+    //float lookFactor = 10f;
+    //bool cameraSprint = false;
     Camera cam;
     Transform cameraTransform;
-    Vector3 cameraPosition;
-    Vector3 worldPos;
+    //Vector3 cameraPosition;
+    //Vector3 worldPos;
     // Start is called before the first frame update
     void Start()
     {

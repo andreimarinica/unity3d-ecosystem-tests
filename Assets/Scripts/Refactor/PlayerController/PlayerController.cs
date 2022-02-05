@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public CollisionP CollisionP;
+    public ManageCollision ManageCollision;
     public Movement Movement;
     public Stats Stats;
 
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     //NOTE: if we use start method will throw error as the object is not assigned yet so we use to set these in awake
     void Awake()
     {
-        CollisionP = GetComponent<CollisionP>();
+        ManageCollision = GetComponent<ManageCollision>();
         Movement = GetComponent<Movement>();
         Stats = GetComponent<Stats>();
     }

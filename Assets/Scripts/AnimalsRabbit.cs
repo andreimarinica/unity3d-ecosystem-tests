@@ -15,11 +15,11 @@ public class AnimalsRabbit : MonoBehaviour
     float movingSpeed = 5f;
     float randomX, randomZ;
     float rabbitHealth = 100f;
-    float rabbitMaxHealth = 100f;
-    float rabbitMaxHunger = 100f;
+    //float rabbitMaxHealth = 100f;
+    //float rabbitMaxHunger = 100f;
     float rabbitHunger = 0f;
-    float rabbitAge = 1f;
-    float rabbitMateNeed = 0f;
+    //float rabbitAge = 1f;
+    //float rabbitMateNeed = 0f;
     string action;
 
     float multiplier = 10f;

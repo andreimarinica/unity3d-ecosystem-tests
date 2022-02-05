@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionP : MonoBehaviour
+public class GameArea : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,10 +14,5 @@ public class CollisionP : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void StartCol()
-    {
-        Debug.Log("col. accessed");
     }
 }

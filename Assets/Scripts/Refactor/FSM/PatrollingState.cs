@@ -5,7 +5,9 @@ public class PatrollingState : BaseState
     public override void EnterState(PlayerStateManager player)
     {
         PlayerController = player.GetComponent<PlayerController>();
-        //PlayerController.CollisionP.StartCol();
+        PlayerController.ManageCollision.StartCol();
+        // move to random direction within bounds
+        
     }
     public override void UpdateState(PlayerStateManager player)
     {
