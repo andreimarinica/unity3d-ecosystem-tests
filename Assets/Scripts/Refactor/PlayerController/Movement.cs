@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [System.NonSerialized] public float speed = 10f;
-    [System.NonSerialized] public float visualRange = 4f;
+    public float speed = 10f;
+    public float visualRange = 4f;
     public float targetDistance;
     public Vector3 targetLocation;
     public GameObject target;
@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void MoveToTarget(Vector3 targetPosition)
@@ -36,5 +36,10 @@ public class Movement : MonoBehaviour
 
         // look at our target
         transform.LookAt(target);
+    }
+
+    public void MoveToRandom()
+    {
+
     }
 }

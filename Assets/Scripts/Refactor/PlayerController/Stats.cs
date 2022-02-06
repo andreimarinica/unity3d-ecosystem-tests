@@ -28,4 +28,25 @@ public class Stats : MonoBehaviour
         // process health variable
         //if(hunger >= 100f && health <= 100f) health = Mathf.Clamp(health -= Time.deltaTime * healthDecreaseRatio, 0f, 100f);
     }
+
+    private void OnDrawGizmos() {
+        if(this.Species == Species.Fox)
+        {
+            Gizmos.color = new Color(0f, 0f, 1f, 0.2f); 
+            Gizmos.DrawSphere(transform.position, GetComponent<Movement>().visualRange * 4);
+        }
+
+        if(this.Species == Species.Rabbit)
+        {
+            Gizmos.color = new Color(0f, 1f, 0f, 0.2f);
+            Gizmos.DrawSphere(transform.position, GetComponent<Movement>().visualRange * 2);
+        }
+
+        if(this.Species == Species.Food)
+        {
+            Gizmos.color = new Color(1f, 0f, 0f, 0.5f); 
+            Gizmos.DrawSphere(transform.position, 0.5f);
+        }                        
+        
+    }
 }

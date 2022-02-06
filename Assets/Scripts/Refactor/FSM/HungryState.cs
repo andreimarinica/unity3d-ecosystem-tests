@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class HungryState : BaseState
 {
+    float initialDistance;
+    float newDistance;
+    int minimumDistanceIndex;
     public override void EnterState(PlayerStateManager player)
     {
         Debug.Log("bummer i'm hungry");
@@ -9,20 +12,18 @@ public class HungryState : BaseState
         // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
 
-        // set the list of foods to an empty list
-        PlayerController.Stats.foodList.Clear();
-
         // set random destination to look foor food
         PlayerController.Movement.targetLocation = PlayerController.Movement.GameArea.GetRandomPosition();
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        // if no food found move to random position
         if(PlayerController.Stats.foodList.Count == 0)
         {
-            // move to random
             PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
             // set the distance
             PlayerController.Movement.targetDistance = Vector3.Distance(PlayerController.transform.position, PlayerController.Movement.targetLocation);
+
             // check if we reached the target
             if(PlayerController.Movement.targetDistance <= 1f)
             {
@@ -30,11 +31,15 @@ public class HungryState : BaseState
                 PlayerController.Movement.targetLocation = PlayerController.Movement.GameArea.GetRandomPosition();
             }
         }
+        else 
+        {
+            // we have a target assigned so move to it
+            PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
+        }
     }
     public override void OnTriggerStay(PlayerStateManager player, Collider other)
     {
-        //Debug.Log("we see " + other.name);
-        //get the items that have the stats class available
+        // get the items that have the stats class available
         if(other.TryGetComponent<Stats>(out Stats entity))
         {
             // if the species spotted is our diet we will add this to a list of foods
@@ -46,45 +51,50 @@ public class HungryState : BaseState
                     // if not, add it
                     PlayerController.Stats.foodList.Add(other.gameObject);
                 }
-                // set our distance variable as a big value initially
-                PlayerController.Movement.targetDistance = 1000f;
-                
+                initialDistance = 10000f;
                 // now that the list of foods is built we need to check which one is closest
                 for (int i = 0; i < PlayerController.Stats.foodList.Count; i++)
                 {
-                    // null check ?
-
-                    // check the distance etween us and the food
-                    float newDistance = Vector3.Distance(PlayerController.transform.position, new Vector3(PlayerController.Stats.foodList[i].transform.position.x, PlayerController.transform.position.y, PlayerController.Stats.foodList[i].transform.position.z));
-
-                    // if the distance is smaller than the previous distance
-                    if(PlayerController.Movement.targetDistance >= newDistance)
+                    if(PlayerController.Stats.foodList[i] != null)
                     {
-                        // change the distance to show the current one
-                        PlayerController.Movement.targetDistance = newDistance;
+                        // check the distance between us and the food
+                        newDistance = Vector3.Distance(PlayerController.transform.position, new Vector3(PlayerController.Stats.foodList[i].transform.position.x, PlayerController.transform.position.y, PlayerController.Stats.foodList[i].transform.position.z));
 
-                        // change our target location to the food location
-                        PlayerController.Movement.targetLocation = PlayerController.Stats.foodList[i].transform.position;
-
-                        // change our target game object to the food game object
-                        PlayerController.Movement.target = PlayerController.Stats.foodList[i].gameObject;
+                        // if the distance is smaller than the previous distance
+                        if(initialDistance >= newDistance)
+                        {
+                            // change the distance to show the current one
+                            initialDistance = newDistance;
+                            minimumDistanceIndex = i;             
+                        }
                     }
 
                 }
-                // if we have found food we move to the food
-                PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
+                // change our target location to the food location
+                PlayerController.Movement.targetLocation = PlayerController.Stats.foodList[minimumDistanceIndex].transform.position;
+
+                // change our target game object to the food game object
+                PlayerController.Movement.target = PlayerController.Stats.foodList[minimumDistanceIndex].gameObject;
+
+                // compute distance
+                PlayerController.Movement.targetDistance = Vector3.Distance(PlayerController.transform.position, new Vector3 (PlayerController.Movement.targetLocation.x, PlayerController.transform.position.y, PlayerController.Movement.targetLocation.z));
 
                 // if we reach food
-                if(PlayerController.Movement.targetDistance <= 1.5f)
+                if(PlayerController.Movement.targetDistance <= 2f)
                 {
                     // hunger is 0
                     PlayerController.Stats.hunger = 0f;
 
-                    // instantiate new food
-                    PlayerController.InstantiateEntity(other.gameObject);
-
+                    if(entity.Species == Species.Food)
+                    {
+                        // instantiate new food
+                        PlayerController.InstantiateEntity(entity.gameObject);
+                    }
                     // destroy food
-                    PlayerController.KillEntity(other.gameObject);
+                    if(PlayerController.Movement.target != null) PlayerController.KillEntity(PlayerController.Movement.target);
+
+                    // player target object is empty
+                    PlayerController.Movement.target = null;
 
                     // change state
                     player.SwitchState(player.Patrolling);
@@ -93,10 +103,21 @@ public class HungryState : BaseState
                 }
             }
         }
+        else 
+        {
+            // set blank list if no food in sight (avoids errors where food is left in list after is destroied)
+            PlayerController.Stats.foodList.Clear();
+            PlayerController.Stats.foodList.TrimExcess();
+        }
 
     }
-    public override void OnCollisionEnter(PlayerStateManager player)
-    {
+    public override void OnTriggerExit(PlayerStateManager player, Collider other)
+    {   
+        // if we cannot see the food anymore, remove it from the list
         
+        if(PlayerController.Stats.foodList.Contains(other.gameObject))
+        {
+            PlayerController.Stats.foodList.Remove(other.gameObject);
+        }
     }
 }

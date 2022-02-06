@@ -23,6 +23,10 @@ public class PlayerStateManager : MonoBehaviour
         currentState.OnTriggerStay(this, other);
     }
 
+    void OnTriggerExit(Collider other) {
+        currentState.OnTriggerExit(this, other);
+    }
+
     // Update is called once per frame
     void Update()
     {

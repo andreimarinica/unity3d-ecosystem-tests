@@ -16,8 +16,13 @@ public class ManageCollision : MonoBehaviour
         
     }
 
-    public void StartCol()
-    {
-        Debug.Log("col. accessed");
+    private void OnCollisionEnter(Collision other) {
+        if(other.gameObject.TryGetComponent<Stats>(out Stats entity))
+        {
+            if(entity.Species == Species.Food)
+            {
+                GetComponent<PlayerController>().Movement.targetLocation = GetComponent<PlayerController>().Movement.GameArea.GetRandomPosition();
+            }
+        }
     }
 }

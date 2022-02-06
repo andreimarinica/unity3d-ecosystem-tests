@@ -14,7 +14,7 @@ public class FleeState : BaseState
     {
         
     }
-    public override void OnCollisionEnter(PlayerStateManager player)
+    public override void OnTriggerExit(PlayerStateManager player, Collider other)
     {
         
     }

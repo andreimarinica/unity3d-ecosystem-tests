@@ -395,10 +395,11 @@ GameObject:
   - component: {fileID: 1332922606859913833}
   - component: {fileID: 1332922606859913832}
   - component: {fileID: 1332922606859913827}
-  - component: {fileID: 1332922606859913826}
-  - component: {fileID: 1332922606859913829}
   - component: {fileID: -3372578257460881821}
   - component: {fileID: 5187742722187455545}
+  - component: {fileID: -6892909613015768133}
+  - component: {fileID: -4417577890167545264}
+  - component: {fileID: 4150837586259278615}
   m_Layer: 6
   m_Name: blueCube
   m_TagString: Untagged
@@ -500,58 +501,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1332922606859913826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332922606859913835}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613dac52453adc44ca274fecc344d4a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isIdle: 0
-  animalSpeed: 10
-  animalVisionRadius: 5
-  generation: 0
-  isHungry: 0
-  animalHunger: 0
-  animalHungerDecayRate: 10
-  animalHungerDecreaseValue: 1
-  isAlive: 1
-  animalHealth: 100
-  animalHealthDecayRate: 10
-  animalHealthDecreaseValue: 1
-  isMale: 1
-  hasPartener: 0
-  recentlyReproducted: 0
-  reachedPartener: 0
-  isPregnant: 0
-  pregnantCooldown: 20
-  pregnantCooldownTimeStamp: 0
-  animalReproductiveUrge: 50
-  animalUrgeIncreaseValue: 5
-  animalUrgeGrowthRate: 20
-  distanceParteners: 0
-  animalTimeAdditive: 0
-  animalTimeLimitIncrement: 10
-  species: 2
-  diet: 0
---- !u!114 &1332922606859913829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1332922606859913835}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69ac104f3337c464a80224e06cdc0c7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  species: 2
 --- !u!114 &-3372578257460881821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,7 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1623a81cce0928241b82e517ceb9662a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!114 &5187742722187455545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -577,5 +525,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c96b39a90f3ec84d94d5f056fe18304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ManageCollision: {fileID: 0}
   Movement: {fileID: 0}
   Stats: {fileID: 0}
+--- !u!114 &-6892909613015768133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332922606859913835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa68f831c5820e148b36c71949d5f6bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 11
+  visualRange: 2
+  targetDistance: 0
+  targetLocation: {x: 0, y: 0, z: 0}
+  target: {fileID: 0}
+  GameArea: {fileID: 0}
+--- !u!114 &-4417577890167545264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332922606859913835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b2962898b741c46951a4f85e0e5adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4150837586259278615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332922606859913835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9a0cd388eaba143b7b298e2f6214d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  healthDecreaseRatio: 10
+  hunger: 0
+  hungerDecreaseRatio: 5
+  reproductiveUrge: 0
+  generation: 0
+  sex: 0
+  Species: 5
+  Diet: 4
+  foodList: []

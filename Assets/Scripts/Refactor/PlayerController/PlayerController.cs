@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
 
     public void KillEntity(GameObject entity)
     {
+        Debug.Log("KILL");
         Destroy(entity);
     }
 
