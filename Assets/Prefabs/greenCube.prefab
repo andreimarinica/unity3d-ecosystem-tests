@@ -571,7 +571,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9a0cd388eaba143b7b298e2f6214d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  partenerFound: 0
   health: 100
+  timeBodyDissapear: 5
   healthDecreaseRatio: 10
   hunger: 0
   hungerDecreaseRatio: 10

@@ -6,6 +6,7 @@ using UnityEditor;
 public class VisualDebug : MonoBehaviour
 {
     Stats stats;
+    string sex;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,14 @@ public class VisualDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(stats.sex == 0) 
+        {
+            sex = "Male";
+        } 
+        else if(stats.sex == 1)
+        {
+            sex = "Female";
+        }
     }
 
     // draw gizmos to show visual range
@@ -49,13 +57,28 @@ public class VisualDebug : MonoBehaviour
         stateGUI.fontStyle = FontStyle.Bold;
         stateGUI.normal.textColor = Color.red;
 
+        GUIStyle maleGUI = new GUIStyle();
+        maleGUI.fontSize = 17;
+        maleGUI.fontStyle = FontStyle.Bold;
+        maleGUI.normal.textColor = Color.blue;
+
+        GUIStyle femaleGUI = new GUIStyle();
+        femaleGUI.fontSize = 17;
+        femaleGUI.fontStyle = FontStyle.Bold;
+        femaleGUI.normal.textColor = Color.magenta;
+
         Handles.Label(new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), "health " + (int)stats.health, paramsGUI);
 
         Handles.Label(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), "hunger " + (int)stats.hunger, paramsGUI);
 
         Handles.Label(new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z), "reprod " + (int)stats.reproductiveUrge, paramsGUI);
+
+        if(sex == "Male") Handles.Label(new Vector3(transform.position.x, transform.position.y + 2.7f, transform.position.z), "Sex: " + sex, maleGUI);
+
+        if(sex == "Female") Handles.Label(new Vector3(transform.position.x, transform.position.y + 2.7f, transform.position.z), "Sex: " + sex, femaleGUI);
         
-        Handles.Label(new Vector3(transform.position.x, transform.position.y + 2.7f, transform.position.z), GetComponent<PlayerStateManager>().currentState.ToString(), stateGUI);  
+        
+        Handles.Label(new Vector3(transform.position.x, transform.position.y + 3.5f, transform.position.z), GetComponent<PlayerStateManager>().currentState.ToString(), stateGUI);  
         }                        
         
     }

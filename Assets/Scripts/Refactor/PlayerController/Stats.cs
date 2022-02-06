@@ -5,7 +5,9 @@ using UnityEditor;
 
 public class Stats : MonoBehaviour
 {
+    public bool partenerFound = false;
     public float health = 100f;
+    public float timeBodyDissapear = 5f;
     public float healthDecreaseRatio = 10f;
     public float hunger = 0f;
     public float hungerDecreaseRatio = 10f;
@@ -13,6 +15,7 @@ public class Stats : MonoBehaviour
     public float reproductiveUrgeIncreaseRatio = 5f;
     public int generation = 0;
     public int sex; // 0 = male; 1 = female;
+    
     public Species Species;
     public Species Diet;
     public List<GameObject> foodList = new List<GameObject>();

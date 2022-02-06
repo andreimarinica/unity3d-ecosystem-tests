@@ -38,11 +38,4 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
-
-    // void StartCoroutine() {
-    //     //currentState.StartCoroutine(this);
-    // }
-
-
-
 }

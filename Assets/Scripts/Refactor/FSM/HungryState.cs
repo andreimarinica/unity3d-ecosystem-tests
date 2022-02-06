@@ -7,8 +7,6 @@ public class HungryState : BaseState
     int minimumDistanceIndex;
     public override void EnterState(PlayerStateManager player)
     {
-        Debug.Log("bummer i'm hungry");
-
         // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
 

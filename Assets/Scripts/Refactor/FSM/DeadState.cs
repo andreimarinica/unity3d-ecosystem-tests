@@ -8,7 +8,6 @@ public class DeadState : BaseState
     {
         // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
-        Debug.Log("enetered death state");
         // process death
         player.StartCoroutine(ProcessDeath(player));
     }
@@ -28,7 +27,7 @@ public class DeadState : BaseState
         PlayerController.Movement.visualRange = 0f;
 
         // Wait for 5 seconds and destroy entity
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(PlayerController.Stats.timeBodyDissapear);
         PlayerController.Destroy(player.gameObject);
 
         
