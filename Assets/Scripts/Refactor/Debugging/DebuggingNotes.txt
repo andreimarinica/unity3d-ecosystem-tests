@@ -4,6 +4,9 @@
 // BUG: child inherits the sphere collider but also creates one of his 
 // BUGFIX: generate sphere colliders only on generation 0
 
+// BUG: if pregnant mother dies just before giving birth, it will give birth to a black rabbit lol
+// BUGFIX: on death try an stop birth coroutine? 
+
 // TODO: child to inherit stats from parents + random
 // TODO: add genetic algorithm 
 // TODO: Debugging tools on key press on / off
