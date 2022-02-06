@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: -3225023406854971988}
   - component: {fileID: -6863347660623897393}
   - component: {fileID: 2286064238120284973}
+  - component: {fileID: -6474365131604549658}
   m_Layer: 6
   m_Name: greenCube
   m_TagString: Untagged
@@ -575,8 +576,22 @@ MonoBehaviour:
   hunger: 0
   hungerDecreaseRatio: 10
   reproductiveUrge: 0
+  reproductiveUrgeIncreaseRatio: 5
   generation: 0
   sex: 0
   Species: 4
   Diet: 3
   foodList: []
+  deathMat: {fileID: 2100000, guid: dbd131853fcd20a4b8bf0e120329b1b9, type: 2}
+--- !u!114 &-6474365131604549658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8264242754386881099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3655dc68622e10747bbff981a59297cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

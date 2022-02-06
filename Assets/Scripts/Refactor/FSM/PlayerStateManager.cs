@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStateManager : MonoBehaviour
 {
-    BaseState currentState;
+    public BaseState currentState;
     public PatrollingState Patrolling = new PatrollingState();
     public HungryState Hungry = new HungryState();
     public HornyState Horny = new HornyState();
@@ -38,4 +38,11 @@ public class PlayerStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this);
     }
+
+    // void StartCoroutine() {
+    //     //currentState.StartCoroutine(this);
+    // }
+
+
+
 }

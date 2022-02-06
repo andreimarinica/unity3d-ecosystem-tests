@@ -290,7 +290,6 @@ public class Animal : MonoBehaviour
                 // reset mother and father
                 fatherOfMyChild = null;
                 babyAnimal.fatherOfMyChild = null;
-                         
             }
          }
 

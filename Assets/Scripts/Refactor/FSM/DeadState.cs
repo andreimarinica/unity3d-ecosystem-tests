@@ -1,21 +1,42 @@
 using UnityEngine;
+using System.Collections;
+
 
 public class DeadState : BaseState
 {
     public override void EnterState(PlayerStateManager player)
     {
-
+        // get a ref to our player controller
+        PlayerController = player.GetComponent<PlayerController>();
+        Debug.Log("enetered death state");
+        // process death
+        player.StartCoroutine(ProcessDeath(player));
     }
-    public override void UpdateState(PlayerStateManager player)
-    {
 
-    }
-    public override void OnTriggerStay(PlayerStateManager player, Collider other)
+    private IEnumerator ProcessDeath(PlayerStateManager player)
     {
+        // Make entity uninteractable
+        PlayerController.GetComponent<Rigidbody>().isKinematic = true;
+        PlayerController.GetComponent<Rigidbody>().useGravity = false;
+        PlayerController.GetComponent<SphereCollider>().enabled = false;
+        PlayerController.GetComponent<BoxCollider>().enabled = false;
+
+        // change the material to black
+        PlayerController.GetComponent<MeshRenderer>().material = PlayerController.Stats.deathMat;
+
+        // remove the visual range in order to remove the gizmo
+        PlayerController.Movement.visualRange = 0f;
+
+        // Wait for 5 seconds and destroy entity
+        yield return new WaitForSeconds(5f);
+        PlayerController.Destroy(player.gameObject);
+
         
     }
-    public override void OnTriggerExit(PlayerStateManager player, Collider other)
-    {
-        
-    }
+
+    public override void UpdateState(PlayerStateManager player) {}
+    public override void CheckPlayerStats(PlayerStateManager player) {}
+    public override void OnTriggerStay(PlayerStateManager player, Collider other) {}
+    public override void OnTriggerExit(PlayerStateManager player, Collider other) {}
+
 }

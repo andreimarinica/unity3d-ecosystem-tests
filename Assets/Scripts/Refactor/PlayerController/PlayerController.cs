@@ -31,14 +31,4 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void KillEntity(GameObject entity)
-    {
-        Debug.Log("KILL");
-        Destroy(entity);
-    }
-
-    public void InstantiateEntity(GameObject entity)
-    {
-        Instantiate(entity, Movement.GameArea.GetRandomPosition(), Quaternion.identity);
-    }
 }

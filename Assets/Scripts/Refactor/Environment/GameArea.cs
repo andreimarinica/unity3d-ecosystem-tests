@@ -11,9 +11,18 @@ public class GameArea : MonoBehaviour
     
     // draw gizmo for the game area 
     private void OnDrawGizmos() {
+
+        // draw cube for play area
         Gizmos.color = new Color(0f, 0f, 0f, 0.2f);
         Gizmos.DrawCube(transform.position, new Vector3(range * 2, range, range * 2));
+
+        // draw wire for cube
+        Gizmos.color = new Color(0f, 0f, 0f, 0.4f);
+        Gizmos.DrawWireCube(transform.position, new Vector3(range * 2, range, range * 2));
+
+        // move the transform to plane level
         transform.position = new Vector3(transform.position.x, range / 2, transform.position.z);
+        
     }
     private void Awake() {
         // set the player controller

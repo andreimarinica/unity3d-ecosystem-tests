@@ -15,6 +15,9 @@ public class PatrollingState : BaseState
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        // check player stats
+        CheckPlayerStats(player);
+
         // move to the target that has been set
         PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
 
@@ -27,13 +30,30 @@ public class PatrollingState : BaseState
             // if we reached target set a new random target
             PlayerController.Movement.targetLocation = PlayerController.Movement.GameArea.GetRandomPosition();
         }
+    }
 
-        // do we need to switch state?
+    public override void CheckPlayerStats(PlayerStateManager player)
+    {
+        // check hunger
         if(PlayerController.Stats.hunger > 50f)
         {
             player.SwitchState(player.Hungry);
-        } 
+        }
+
+        // check health
+        if(PlayerController.Stats.health <= 0f)
+        {
+            player.SwitchState(player.Dead);
+        }
+
+        // check reproductionUrge
+        if(PlayerController.Stats.reproductiveUrge >= 50f)
+        {
+            player.SwitchState(player.Horny);
+        }
+
     }
+
     public override void OnTriggerStay(PlayerStateManager player, Collider other)
     {
         

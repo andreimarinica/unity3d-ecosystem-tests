@@ -17,6 +17,9 @@ public class HungryState : BaseState
     }
     public override void UpdateState(PlayerStateManager player)
     {
+        // check player stats
+        CheckPlayerStats(player);
+
         // if no food found move to random position
         if(PlayerController.Stats.foodList.Count == 0)
         {
@@ -37,6 +40,16 @@ public class HungryState : BaseState
             PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
         }
     }
+    public override void CheckPlayerStats(PlayerStateManager player)
+    {
+        // check health
+        if(PlayerController.Stats.health <= 0f)
+        {
+            player.SwitchState(player.Dead);
+        }
+
+    }
+
     public override void OnTriggerStay(PlayerStateManager player, Collider other)
     {
         // get the items that have the stats class available
@@ -88,11 +101,17 @@ public class HungryState : BaseState
                     if(entity.Species == Species.Food)
                     {
                         // instantiate new food
-                        PlayerController.InstantiateEntity(entity.gameObject);
-                    }
-                    // destroy food
-                    if(PlayerController.Movement.target != null) PlayerController.KillEntity(PlayerController.Movement.target);
+                        PlayerController.Instantiate(entity.gameObject, PlayerController.Movement.GameArea.GetRandomPosition(), Quaternion.identity);
 
+                        // destroy food
+                        if(entity.gameObject != null) PlayerController.Destroy(entity.gameObject);
+                    }
+                    else
+                    {
+                        //PlayerController.Stats.foodList[minimumDistanceIndex].gameObject.GetComponent<PlayerController>().Stats.health = 0f;
+                        entity.health = 0f;
+                    }
+                    
                     // player target object is empty
                     PlayerController.Movement.target = null;
 
@@ -105,7 +124,7 @@ public class HungryState : BaseState
         }
         else 
         {
-            // set blank list if no food in sight (avoids errors where food is left in list after is destroied)
+            // set blank list if no food in sight (avoids errors where food is left in list after is destroyed)
             PlayerController.Stats.foodList.Clear();
             PlayerController.Stats.foodList.TrimExcess();
         }
