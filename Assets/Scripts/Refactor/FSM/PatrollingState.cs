@@ -49,7 +49,7 @@ public class PatrollingState : BaseState
         // check reproductionUrge
         if(PlayerController.Stats.reproductiveUrge >= 50f)
         {
-            player.SwitchState(player.Horny);
+            player.SwitchState(player.FindPartener);
         }
 
     }

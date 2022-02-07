@@ -1,15 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class HornyState : BaseState
+public class FindPartenerState : BaseState 
 {
-    //private bool partenerFound = false;
-    private bool DoitOnce = false;
     public override void EnterState(PlayerStateManager player)
     {
-        //partenerFound = false;
-        DoitOnce = false;
-
         // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
 
@@ -18,9 +13,8 @@ public class HornyState : BaseState
     }
     public override void UpdateState(PlayerStateManager player)
     {
-        if(PlayerController.Stats.partenerFound && PlayerController.Movement.target == null) PlayerController.Stats.partenerFound = false;
         // check player stats
-        if(!PlayerController.Stats.partenerFound) CheckPlayerStats(player);
+        CheckPlayerStats(player);
         
         // move player to target
         PlayerController.Movement.MoveToTarget(PlayerController.Movement.targetLocation);
@@ -40,6 +34,7 @@ public class HornyState : BaseState
         // check hunger
         if(PlayerController.Stats.hunger > 50f)
         {
+            // do we care about hunger? it might hurt if not. if we care we need to reset the player
             player.SwitchState(player.Hungry);
         }
 
@@ -53,56 +48,34 @@ public class HornyState : BaseState
 
     public override void OnTriggerStay(PlayerStateManager player, Collider other)
     {
+        // if we trigger an object with the Stats component make this object as entity
         if(other.TryGetComponent<Stats>(out Stats entity))
         {
+            // if the object we met it's the same species as us and we are opposite sex we go further
             if((entity.Species == PlayerController.Stats.Species) && ((entity.sex == 1 && PlayerController.Stats.sex == 0) || (entity.sex == 0 && PlayerController.Stats.sex == 1)))
             {
+                // see if the entity we met it's willing to mate
                 if(entity.GetComponent<PlayerStateManager>().currentState.ToString() == PlayerController.GetComponent<PlayerStateManager>().currentState.ToString() && !PlayerController.Stats.partenerFound && !entity.partenerFound)
                 {
+                    // change state to mating state?
+
+                    // set parteners and all that
                     PlayerController.Stats.partenerFound = true;
                     entity.partenerFound = true;
-
-                    PlayerController.Movement.target = entity.gameObject;
                     entity.GetComponent<Movement>().target = PlayerController.gameObject;
+                    PlayerController.Movement.target = entity.gameObject;
 
-                    PlayerController.Movement.targetLocation = entity.transform.position;
-                }
-
-                if(PlayerController.Stats.partenerFound && entity.partenerFound)
-                {
-                    PlayerController.Movement.targetDistance = Vector3.Distance(PlayerController.transform.position, entity.transform.position);
-                    if(PlayerController.Movement.targetDistance <= 4.5f)
+                    // check if we are parteners before mating?
+                    if(PlayerController.Movement.target == entity.gameObject && entity.GetComponent<Movement>().target == PlayerController.gameObject)
                     {
-                        PlayerController.transform.LookAt(entity.transform);
-                        entity.transform.LookAt(PlayerController.transform);
-                        PlayerController.Movement.targetLocation = PlayerController.transform.position;
-                        PlayerController.Stats.reproductiveUrge = 0f;
-                        PlayerController.Stats.reproductiveUrgeIncreaseRatio = 0f;
-                        if(!DoitOnce)
-                        {
-                            PlayerController.StartCoroutine(Mating(player));
-                            DoitOnce = true;
-                        } 
-                        
-                    }
+                        // change state to mating?
+                        player.SwitchState(player.Mating);
+                        entity.GetComponent<PlayerStateManager>().SwitchState(entity.GetComponent<PlayerStateManager>().Mating);
+                    }  
                 }
             }
         }
     }
-
-    private IEnumerator Mating(PlayerStateManager player)
-    {
-        yield return new WaitForSeconds(5f);
-        PlayerController.Stats.partenerFound = false;
-        if(PlayerController.Stats.sex == 0) player.SwitchState(player.Patrolling);
-        if(PlayerController.Stats.sex == 1) player.SwitchState(player.Pregnant);
-
-        yield return new WaitForSeconds(30f);
-        PlayerController.Stats.reproductiveUrgeIncreaseRatio = 10f;
-
-    }
-
-
     public override void OnTriggerExit(PlayerStateManager player, Collider other)
     {
         

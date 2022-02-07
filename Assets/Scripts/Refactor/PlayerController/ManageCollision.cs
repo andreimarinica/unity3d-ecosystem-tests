@@ -17,12 +17,13 @@ public class ManageCollision : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.TryGetComponent<Stats>(out Stats entity))
-        {
-            if(entity.Species == Species.Food)
-            {
-                GetComponent<PlayerController>().Movement.targetLocation = GetComponent<PlayerController>().Movement.GameArea.GetRandomPosition();
-            }
-        }
+        // if(other.gameObject.TryGetComponent<Stats>(out Stats entity))
+        // {
+        //     if(entity.Species == Species.Food)
+        //     {
+        //         GetComponent<PlayerController>().Movement.targetLocation = GetComponent<PlayerController>().Movement.GameArea.GetRandomPosition();
+        //     }
+        // }
+        GetComponent<PlayerController>().Movement.targetLocation = GetComponent<PlayerController>().Movement.GameArea.GetRandomPosition();
     }
 }

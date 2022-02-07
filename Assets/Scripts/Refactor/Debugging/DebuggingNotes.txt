@@ -5,7 +5,7 @@
 // BUGFIX: generate sphere colliders only on generation 0
 
 // BUG: if pregnant mother dies just before giving birth, it will give birth to a black rabbit lol
-// BUGFIX: on death try an stop birth coroutine? 
+// BUGFIX: on death try and stop birth coroutine? 
 
 // TODO: child to inherit stats from parents + random
 // TODO: add genetic algorithm 

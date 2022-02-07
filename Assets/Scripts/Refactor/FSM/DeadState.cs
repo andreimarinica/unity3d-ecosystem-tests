@@ -20,6 +20,12 @@ public class DeadState : BaseState
         PlayerController.GetComponent<SphereCollider>().enabled = false;
         PlayerController.GetComponent<BoxCollider>().enabled = false;
 
+        // 
+        if(PlayerController.Stats.partenerFound && PlayerController.Movement.target != null)
+        {
+            PlayerController.Movement.target.GetComponent<Stats>().partenerFound = false;
+        }
+
         // change the material to black
         PlayerController.GetComponent<MeshRenderer>().material = PlayerController.Stats.deathMat;
 
