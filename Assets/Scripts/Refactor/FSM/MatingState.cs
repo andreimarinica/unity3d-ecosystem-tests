@@ -11,6 +11,7 @@ public class MatingState : BaseState
         // get a ref to our player controller
         PlayerController = player.GetComponent<PlayerController>();
 
+        // reset vars
         onlyOnce = false;
         reachedMate = false;
     }
@@ -61,7 +62,15 @@ public class MatingState : BaseState
         }
         
         // check distance between us and mate and make reachedMate true when this happens
-        if(PlayerController.Movement.targetDistance <= 3f) reachedMate = true;
+        if(PlayerController.Stats.Species == Species.Rabbit)
+        {
+            if(PlayerController.Movement.targetDistance <= 3f) reachedMate = true;
+        }
+        else if(PlayerController.Stats.Species == Species.Fox)
+        {
+            if(PlayerController.Movement.targetDistance <= 5f) reachedMate = true;
+        }
+        
     }
 
     private IEnumerator Mating(PlayerStateManager player)
