@@ -12,7 +12,7 @@ public class PregnantState : BaseState
         PlayerController.StartCoroutine(DeliverBaby(player));
 
         // Change state
-        player.SwitchState(player.Patrolling);
+        player.SwitchState(player.Patrolling); 
     }
     public override void UpdateState(PlayerStateManager player)
     {
@@ -22,18 +22,11 @@ public class PregnantState : BaseState
 
     public override void CheckPlayerStats(PlayerStateManager player)
     {
-        // check hunger
-        // if(PlayerController.Stats.hunger > 50f)
-        // {
-        //     player.SwitchState(player.Hungry);
-        // }
-
         // check health
         if(PlayerController.Stats.health <= 0f)
         {
             player.SwitchState(player.Dead);
         }
-
     }
 
     private IEnumerator DeliverBaby(PlayerStateManager player)
@@ -54,19 +47,13 @@ public class PregnantState : BaseState
         }
 
         yield return new WaitForSeconds(50f);
+        
         if(baby.gameObject != null)
         {
         baby.GetComponent<PlayerController>().Stats.reproductiveUrgeIncreaseRatio = 10f;
         }
-
     }
 
-    public override void OnTriggerStay(PlayerStateManager player, Collider other)
-    {
-        
-    }
-    public override void OnTriggerExit(PlayerStateManager player, Collider other)
-    {
-        
-    }
+    public override void OnTriggerStay(PlayerStateManager player, Collider other) {}
+    public override void OnTriggerExit(PlayerStateManager player, Collider other) {}
 }

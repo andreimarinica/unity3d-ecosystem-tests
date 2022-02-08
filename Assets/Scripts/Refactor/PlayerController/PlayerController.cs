@@ -17,18 +17,23 @@ public class PlayerController : MonoBehaviour
         Stats = GetComponent<Stats>();
     }
 
-    void Start() {
+    void Start() 
+    {
         // on init add the sphere collider as a trigger
-        // NOTE: when we will instantiate a child it will take this component as well
-        SphereCollider sphereCollider = gameObject.AddComponent<SphereCollider>();
-        sphereCollider.radius = Movement.visualRange;
-        sphereCollider.isTrigger = true;
+        if(Stats.generation == 0) AddSphereCollider(gameObject, Movement.visualRange, true);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void AddSphereCollider(GameObject obj, float range, bool isTrigger) 
+    {
+        SphereCollider sphereCollider = obj.AddComponent<SphereCollider>();
+        sphereCollider.radius = range;
+        sphereCollider.isTrigger = isTrigger;
     }
 
 }

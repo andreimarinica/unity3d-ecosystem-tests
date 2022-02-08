@@ -1,13 +1,6 @@
-// BUG: something happens when reproducing and one of the partners (not always) will be stuck with no movement as the hasPartner remains true
-// BUGFIX: ..???
-
-// BUG: child inherits the sphere collider but also creates one of his 
-// BUGFIX: generate sphere colliders only on generation 0
-
 // BUG: if pregnant mother dies just before giving birth, it will give birth to a black rabbit lol
 // BUGFIX: on death try and stop birth coroutine? 
 
 // TODO: child to inherit stats from parents + random
 // TODO: add genetic algorithm 
-// TODO: Debugging tools on key press on / off
 // TODO: flee state

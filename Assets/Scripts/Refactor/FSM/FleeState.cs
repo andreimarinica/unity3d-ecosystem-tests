@@ -28,12 +28,6 @@ public class FleeState : BaseState
 
     }
 
-    public override void OnTriggerStay(PlayerStateManager player, Collider other)
-    {
-        
-    }
-    public override void OnTriggerExit(PlayerStateManager player, Collider other)
-    {
-        
-    }
+    public override void OnTriggerStay(PlayerStateManager player, Collider other) {}
+    public override void OnTriggerExit(PlayerStateManager player, Collider other) {}
 }

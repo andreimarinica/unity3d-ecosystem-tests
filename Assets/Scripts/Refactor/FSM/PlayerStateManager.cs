@@ -12,7 +12,6 @@ public class PlayerStateManager : MonoBehaviour
     public DeadState Dead = new DeadState();
     public PregnantState Pregnant = new PregnantState();
     public MatingState Mating = new MatingState();
-    // Start is called before the first frame update
 
     void Start()
     {
