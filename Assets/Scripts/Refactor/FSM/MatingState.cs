@@ -65,6 +65,7 @@ public class MatingState : BaseState
         if(PlayerController.Stats.Species == Species.Rabbit)
         {
             if(PlayerController.Movement.targetDistance <= 3f) reachedMate = true;
+            //reachedMate = PlayerController.Movement.targetDistance <= 3f ? true : false; #DEV
         }
         else if(PlayerController.Stats.Species == Species.Fox)
         {
@@ -75,9 +76,9 @@ public class MatingState : BaseState
 
     private IEnumerator Mating(PlayerStateManager player)
     {
+        // after 5 seconds do the below
         yield return new WaitForSeconds(5f);
 
-        // after 5 seconds do the below
         PlayerController.Stats.partenerFound = false;
         PlayerController.Movement.target = null;
         PlayerController.Stats.reproductiveUrge = 0f;
@@ -85,9 +86,9 @@ public class MatingState : BaseState
         if(PlayerController.Stats.sex == 0) player.SwitchState(player.Patrolling);
         if(PlayerController.Stats.sex == 1) player.SwitchState(player.Pregnant);
 
+        // and after 30 seconds we can start increasing our mating urge again
         yield return new WaitForSeconds(30f);
 
-        // and after 30 seconds we can start increasing our mating urge again
         PlayerController.Stats.reproductiveUrgeIncreaseRatio = 10f;
 
     }

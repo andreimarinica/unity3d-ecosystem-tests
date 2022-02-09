@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class PregnantState : BaseState
 {
@@ -38,20 +39,27 @@ public class PregnantState : BaseState
         var baby = PlayerController.Instantiate(PlayerController.gameObject, PlayerController.transform.position, Quaternion.identity);
 
         // set baby stats
-        if(baby.gameObject != null)
+        if(!(baby.gameObject is null)) SetBabyStats(baby.gameObject);
+
+        yield return new WaitForSeconds(50f);
+        
+        if(!(baby.gameObject is null))
         {
+        baby.GetComponent<PlayerController>().Stats.reproductiveUrgeIncreaseRatio = 10f;
+        }
+    }
+
+    private void SetBabyStats(GameObject baby) // #DEV
+    {
+        if(baby is null) return; 
+
         baby.GetComponent<PlayerController>().Stats.hunger = 0f;
         baby.GetComponent<PlayerController>().Stats.health = 100f;
         baby.GetComponent<PlayerController>().Stats.reproductiveUrge = 0f;
         baby.GetComponent<PlayerController>().Stats.generation++;
-        }
 
-        yield return new WaitForSeconds(50f);
-        
-        if(baby.gameObject != null)
-        {
-        baby.GetComponent<PlayerController>().Stats.reproductiveUrgeIncreaseRatio = 10f;
-        }
+
+
     }
 
     public override void OnTriggerStay(PlayerStateManager player, Collider other) {}
